@@ -6,6 +6,8 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [department, setDepartment] = useState('');
+  const [role, setRole] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
@@ -15,10 +17,13 @@ const Signup = () => {
       return;
     }
     setError('');
+    // Handle signup logic here based on the role (student or admin)
+    console.log('Role:', role);
     console.log('Name:', name);
     console.log('Email:', email);
-    console.log('Password:', password);
-    // Handle signup logic here
+    if (role === 'admin') {
+      console.log('Department:', department);
+    }
   };
 
   return (
@@ -26,6 +31,34 @@ const Signup = () => {
       <form className="signup-form" onSubmit={handleSubmit}>
         <h2>Signup</h2>
         {error && <p className="error-message">{error}</p>}
+        
+        {/* Checkboxes for role selection */}
+        <div className="role-selection">
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="student"
+              checked={role === 'student'}
+              onChange={() => setRole('student')}
+              required
+            />
+            Student
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="admin"
+              checked={role === 'admin'}
+              onChange={() => setRole('admin')}
+              required
+            />
+            Admin
+          </label>
+        </div>
+
+        {/* Common fields for both Student and Admin */}
         <div className="input-group">
           <label htmlFor="name">Name</label>
           <input
@@ -36,6 +69,7 @@ const Signup = () => {
             required
           />
         </div>
+
         <div className="input-group">
           <label htmlFor="email">Email</label>
           <input
@@ -46,6 +80,7 @@ const Signup = () => {
             required
           />
         </div>
+
         <div className="input-group">
           <label htmlFor="password">Password</label>
           <input
@@ -56,6 +91,7 @@ const Signup = () => {
             required
           />
         </div>
+
         <div className="input-group">
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
@@ -66,6 +102,21 @@ const Signup = () => {
             required
           />
         </div>
+
+        {/* Additional field for Admin role */}
+        {role === 'admin' && (
+          <div className="input-group">
+            <label htmlFor="department">Department</label>
+            <input
+              type="text"
+              id="department"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+              required
+            />
+          </div>
+        )}
+
         <button type="submit" className="signup-btn">Signup</button>
       </form>
     </div>
