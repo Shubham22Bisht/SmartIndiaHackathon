@@ -1,0 +1,105 @@
+/* General styling for form container */
+.form {
+    margin: 0 0 0 0;
+    padding: 30px;
+    /* width: 70%; */
+    background-color: #ffbd15;
+    border-radius: 10px;
+  }
+  
+  /* Sections (Personal Info, Academic Details, Bank Details) */
+  .section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 10px solid #000000;
+    border-radius: 10px;
+  }
+  
+  /* Section titles */
+  legend {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0 10px;
+  }
+  
+  /* Flexbox layout for each row in the form */
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  
+  .form-row label {
+    flex: 2;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Approval checkboxes container */
+  .approval-checkboxes {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 80px;
+  }
+  
+  /* Checkboxes have auto width */
+  input[type="checkbox"] {
+    width: auto;
+  }
+  
+  /* Submit button */
+  input[type="submit"] {
+    background-color: #23da29;
+    color: rgba(0, 0, 0, 0.829);
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #e1e1e1;
+  }
+  
+  /* Adjustments for responsiveness */
+  @media screen and (max-width: 768px) {
+    .form {
+      width: 90%;
+      padding: 20px;
+    }
+  
+    .form-row {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    input, select, label {
+      font-size: 16px;
+    }
+  
+    input[type="submit"] {
+      font-size: 16px;
+      padding: 12px;
+    }
+  
+    .approval-checkboxes {
+      justify-content: flex-start;
+    }
+  }
+  
