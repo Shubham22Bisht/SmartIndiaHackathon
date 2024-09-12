@@ -1,113 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./Form.css";
 
 // Reusable component for approval checkboxes
-// const ApprovalCheckboxes = ({ fieldName, onChange, userType }) => {
-//   const isOfficerLevel1 = userType === 'officerLevel1';
-//   const isOfficerLevel2 = userType === 'officerLevel2';
-
-//   return (
-//     <div className="approval-checkboxes">
-//       <label>
-//         Institution Approval:
-//         <input
-//           type="checkbox"
-//           name={`institution${fieldName}Approved`}
-//           onChange={onChange}
-//           disabled={!isOfficerLevel1} // Disabled for everyone except Officer Level 1
-//         />
-//       </label>
-
-//       <label>
-//         Regional Approval:
-//         <input
-//           type="checkbox"
-//           name={`regional${fieldName}Approved`}
-//           onChange={onChange}
-//           disabled={!isOfficerLevel2} // Disabled for everyone except Officer Level 2
-//         />
-//       </label>
-//     </div>
-//   );
-// };
-const ApprovalCheckboxes = ({ fieldName, onChange, userType }) => {
-  const isOfficerLevel1 = userType === 'officerLevel1';
-  const isOfficerLevel2 = userType === 'officerLevel2';
-
+const ApprovalCheckboxes = ({ fieldName, onChange }) => {
   return (
     <div className="approval-checkboxes">
-      <label>
-        Institution Approval:
-        <input
-          type="checkbox"
-          name={`institution${fieldName}Approved`}
-          onChange={onChange}
-          disabled={!isOfficerLevel1} // Disabled for everyone except Officer Level 1
-        />
+      <label>Institution
+        <input type="checkbox" name={`institution${fieldName}Approved`} onChange={onChange} />
       </label>
-
-      <label>
-        Regional Approval:
-        <input
-          type="checkbox"
-          name={`regional${fieldName}Approved`}
-          onChange={onChange}
-          disabled={!isOfficerLevel2} // Disabled for everyone except Officer Level 2
-        />
+      <label>Regional
+        <input type="checkbox" name={`regional${fieldName}Approved`} onChange={onChange} />
+      </label>
+      <label>District
+        <input type="checkbox" name={`district${fieldName}Approved`} onChange={onChange} />
       </label>
     </div>
   );
 };
 
-
-
-export const Form = ({ userType, fetchData }) => {
+export const Form = () => {
   const [inputs, setInputs] = useState({});
   const [approvals, setApprovals] = useState({});
 
-  useEffect(() => {
-    if (userType !== 'student') {
-      fetchData().then(data => {
-        setInputs(data.inputs);
-        setApprovals(data.approvals);
-      }).catch(error => {
-        console.error('Failed to fetch data:', error);
-      });
-    }
-  }, [userType, fetchData]);
-
   const handleChange = (event) => {
-    if (userType === 'student') {
-      const { name, value } = event.target;
-      setInputs(prev => ({ ...prev, [name]: value }));
-    }
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleApprovalChange = (event) => {
-    if (userType !== 'student') {
-      const { name, checked } = event.target;
-      setApprovals(prev => ({ ...prev, [name]: checked }));
-    }
+    const { name, checked } = event.target;
+    setApprovals((prev) => ({ ...prev, [name]: checked }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Form Inputs:', inputs);
-    console.log('Approvals:', approvals);
-    // You would typically submit to the backend here
+    console.log(inputs);
+    console.log(approvals);
   };
 
   return (
-    <>
-    <div className='formHeader'>
-      <h1>APPLICATON FORM</h1>
-      </div>
     <div className="form">
       <form onSubmit={handleSubmit}>
         
         {/* Personal Info Section */}
         <fieldset className="section personal-info">
           <legend>Personal Info</legend>
+          
           <div className="form-row">
             <label>
               Enter Your Name:
@@ -116,40 +55,37 @@ export const Form = ({ userType, fetchData }) => {
                 type="text"
                 value={inputs.username || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="Name" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="Name" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="Name" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
-              Father's Name:
+              Fathers Name:
               <input
                 name="fathersName"
                 type="text"
                 value={inputs.fathersName || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="FathersName" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="FathersName" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="FathersName" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
-              Mother's Name:
+              Mothers Name:
               <input
                 name="mothersName"
                 type="text"
                 value={inputs.mothersName || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="MothersName" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="MothersName" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="MothersName" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
               Aadhaar No:
@@ -158,26 +94,24 @@ export const Form = ({ userType, fetchData }) => {
                 type="text"
                 value={inputs.aadhaarNo || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="Aadhaar" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="Aadhaar" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="Aadhaar" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
               Mobile No:
               <input
-                name="mobileNo"
+                name="MobileNo"
                 type="text"
-                value={inputs.mobileNo || ""}
+                value={inputs.MobileNo || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {/* <ApprovalCheckboxes fieldName="Mobile" onChange={handleApprovalChange} userType={userType} /> */}
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="Mobile" onChange={handleApprovalChange} userType={userType} />)}
+            <ApprovalCheckboxes fieldName="Mobile" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
               DOB:
@@ -186,12 +120,11 @@ export const Form = ({ userType, fetchData }) => {
                 type="date"
                 value={inputs.DOB || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="DOB" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="DOB" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="DOB" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
               Email Id:
@@ -200,12 +133,11 @@ export const Form = ({ userType, fetchData }) => {
                 type="email"
                 value={inputs.email || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="Email" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="Email" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="Email" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
               Enter Your Age:
@@ -214,17 +146,16 @@ export const Form = ({ userType, fetchData }) => {
                 type="number"
                 value={inputs.userAge || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="Age" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="Age" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="Age" onChange={handleApprovalChange} />
           </div>
         </fieldset>
 
         {/* Academic Details Section */}
         <fieldset className="section academic-info">
           <legend>Academic Details</legend>
+
           <div className="form-row">
             <label>
               Enter Your State of Domicile:
@@ -233,34 +164,28 @@ export const Form = ({ userType, fetchData }) => {
                 type="text"
                 value={inputs.userState || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="State" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="State" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="State" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
               Scholarship Category:
-              <select
-                name="ScholarshipCategory"
-                value={inputs.ScholarshipCategory || ""}
-                onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
-              >
+              <select name="ScholarshipCategory" value={inputs.ScholarshipCategory || ""} onChange={handleChange}>
                 <option value="">Select Category</option>
                 <option value="Pre Matric">Pre Matric</option>
                 <option value="Post Matric">Post Matric</option>
               </select>
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="ScholarshipCategory" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="ScholarshipCategory" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="ScholarshipCategory" onChange={handleApprovalChange} />
           </div>
         </fieldset>
 
         {/* Bank Details Section */}
         <fieldset className="section bank-info">
           <legend>Bank Details</legend>
+
           <div className="form-row">
             <label>
               Bank Account No:
@@ -269,12 +194,11 @@ export const Form = ({ userType, fetchData }) => {
                 type="text"
                 value={inputs.accountNo || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="AccountNo" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="AccountNo" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="AccountNo" onChange={handleApprovalChange} />
           </div>
+
           <div className="form-row">
             <label>
               IFSC Code:
@@ -283,23 +207,14 @@ export const Form = ({ userType, fetchData }) => {
                 type="text"
                 value={inputs.ifscCode || ""}
                 onChange={handleChange}
-                disabled={userType !== 'student'} // Only editable for the student
               />
             </label>
-            {userType !== 'student' && (<ApprovalCheckboxes fieldName="IFSC" onChange={handleApprovalChange} userType={userType} />)}
-            {/* <ApprovalCheckboxes fieldName="IFSC" onChange={handleApprovalChange} userType={userType} /> */}
+            <ApprovalCheckboxes fieldName="IFSC" onChange={handleApprovalChange} />
           </div>
         </fieldset>
-
-        <input type="submit" value="Submit" />
+        
+        <input type="submit" />
       </form>
     </div>
-    </>
   );
 };
-
-// Example usage
-// Render this component and pass the userType as a prop based on the current logged-in user
-// <Form userType="student" /> for student
-// <Form userType="officerLevel1" /> for officer level 1
-// <Form userType="officerLevel2" /> for officer level 2
