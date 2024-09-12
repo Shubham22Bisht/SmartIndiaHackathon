@@ -1,24 +1,24 @@
 /* General styling for form container */
 .form {
-    margin: 0 0 0 0;
-    padding: 30px;
-    /* width: 70%; */
-    background-color: #ffbd15;
+    margin: 0;
     border-radius: 10px;
+    border: 1px solid #ccc;  /* Light border for the form */
+    color: #333;  /* General text color */
   }
   
   /* Sections (Personal Info, Academic Details, Bank Details) */
   .section {
     margin-bottom: 40px;
     padding: 20px;
-    border: 10px solid #000000;
+    border: 2px solid #bbb;  /* Border around each section */
     border-radius: 10px;
   }
   
   /* Section titles */
   legend {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px; /* Increased section title size */
+    color: #333;
     padding: 0 10px;
   }
   
@@ -35,17 +35,33 @@
     flex: 2;
     font-weight: bold;
     font-family: Arial, sans-serif;
-    font-size: 18px;
+    font-size: 20px;  /* Increased label size */
+    color: #333;
   }
   
-  input, select {
+  input, select, textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 2px solid #999;  /* Dark border around inputs */
     border-radius: 5px;
     font-family: Arial, sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     box-sizing: border-box;
+    color: #ffffff;  /* Text inside inputs */
+    background-color: transparent;  /* Transparent input boxes */
+    transition: border-color 0.3s;  /* Smooth transition on input focus */
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    border-color: #666;  /* Darker border on focus */
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: #999;  /* Light gray placeholder text */
+  }
+  
+  textarea {
+    height: 100px;  /* Larger height for textarea */
   }
   
   /* Approval checkboxes container */
@@ -53,28 +69,37 @@
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    gap: 80px;
+    gap: 15px;
   }
   
-  /* Checkboxes have auto width */
+  /* Increased size of checkboxes */
   input[type="checkbox"] {
-    width: auto;
-  }
-  
-  /* Submit button */
-  input[type="submit"] {
-    background-color: #23da29;
-    color: rgba(0, 0, 0, 0.829);
-    padding: 14px;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
+    width: 25px;  /* Increased checkbox size */
+    height: 25px;  /* Increased checkbox size */
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.3s ease;  /* Smooth transition on click */
   }
   
-  input[type="submit"]:hover {
-    background-color: #e1e1e1;
+  input[type="checkbox"]:active {
+    transform: scale(1.2);  /* Slightly enlarge on click */
+  }
+  
+  /* Submit and Back buttons */
+  input[type="submit"], .form-button {
+    background-color: #f9e6f2;  /* Light pink background for buttons */
+    color: #333;  /* Dark text for buttons */
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: 2px solid #999;  /* Border for buttons */
+    border-radius: 25px;  /* Rounded corners */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  input[type="submit"]:hover, .form-button:hover {
+    background-color: #010101;  /* Darker pink on hover */
+    color: #ffffff;
   }
   
   /* Adjustments for responsiveness */
@@ -89,11 +114,11 @@
       gap: 10px;
     }
   
-    input, select, label {
+    input, select, label, textarea {
       font-size: 16px;
     }
   
-    input[type="submit"] {
+    input[type="submit"], .form-button {
       font-size: 16px;
       padding: 12px;
     }
