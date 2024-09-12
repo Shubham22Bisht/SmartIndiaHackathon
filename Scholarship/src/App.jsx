@@ -5,6 +5,7 @@ import Signup from './pages/Signup/Signup';
 import Navbar from './components/Navbar/Navbar';
 import { Home } from './pages/Home';
 import StatusTracker from './pages/StatusTracker/StatusTracker';
+import Dashboard from './pages/Dashboard/Dashboard';
 const App = () => {
   return (
     <Router>
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/status" element={<StatusTracker/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
     </Router>
   );

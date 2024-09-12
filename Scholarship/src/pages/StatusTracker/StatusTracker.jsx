@@ -7,7 +7,7 @@ const StatusTracker = ({ currentStep }) => {
     { name: 'Order Placed', date: '03 Sep', color: '#FFD700' }, // Gold
     { name: 'Shipped', date: '04 Sep', color: '#FF8C00' },      // Dark orange
     { name: 'Arriving', date: '14 Sep', color: '#1E90FF' },    // Dodger blue
-    { name: 'Delivered', date: '17 Sep', color: '#32CD32' }    // Lime green (originally)
+    { name: 'Delivered', date: '17 Sep', color: '#32CD32' }    // Lime green
   ];
 
   return (
@@ -16,8 +16,7 @@ const StatusTracker = ({ currentStep }) => {
         {steps.map((step, index) => (
           <React.Fragment key={index}>
             <div className={`step ${index <= currentStep ? 'active' : ''}`}>
-              {/* Change here: Apply vibrant green to all active nodes */}
-              <div className="step-icon" style={{ backgroundColor: index <= currentStep ? '#32CD32' : '#ccc' }}>
+              <div className="step-icon" style={{ backgroundColor: index <= currentStep ? step.color : '#ccc' }}>
                 {index <= currentStep ? '✓' : index + 1}
               </div>
               <div className="step-info">
@@ -26,7 +25,7 @@ const StatusTracker = ({ currentStep }) => {
               </div>
             </div>
             {index < steps.length - 1 && (
-              <div className={`step-line ${index < currentStep ? 'completed' : ''}`} style={{ backgroundColor: index < currentStep ? step.color : '#ddd' }}></div>
+              <div className={`step-line ${index < currentStep ? 'completed' : ''}`} style={{ backgroundColor: index < currentStep ? steps[index].color : '#ddd' }}></div>
             )}
           </React.Fragment>
         ))}

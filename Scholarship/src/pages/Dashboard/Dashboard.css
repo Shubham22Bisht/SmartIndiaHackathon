@@ -1,0 +1,103 @@
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.dashboard-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.top-widgets {  /* This will layout the widgets in a row */
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px; /* Space between widgets and table */
+}
+
+.widget {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: calc(33.333% - 20px); /* Subtracting margin from width */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+.widget.table-widget {
+    width: 100%; /* Full width for the table widget */
+    margin-top: 20px; /* Space from top widgets */
+}
+
+.widget h2 {
+    color: #333;
+}
+
+.widget table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.widget th, .widget td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.widget select {
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+}
+.search-input {
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.filters-row {
+    display: flex;
+    justify-content: space-between;  /* Evenly spaces filters across the row */
+    margin-bottom: 20px;  /* Spacing from filters to table */
+}
+
+.search-input, .filter-select {
+    flex-grow: 1;  /* Each filter will take equal width */
+    margin-right: 10px;  /* Spacing between filters */
+}
+
+.search-input:last-child, .filter-select:last-child {
+    margin-right: 0;  /* Remove margin for the last filter element */
+}
+.filters-row {
+    display: flex;
+    justify-content: space-between;  /* Ensures even spacing */
+    align-items: center;            /* Aligns items vertically */
+    margin-bottom: 20px;            /* Space from filters to table */
+}
+
+.search-input, .filter-select {
+    flex: 1;                       /* Each filter will take an equal part of the space */
+    margin-right: 10px;            /* Spacing between filters */
+    padding: 8px;                  /* Padding to match the select box height */
+}
+
+.search-input:last-child, .filter-select:last-child {
+    margin-right: 0;               /* Remove margin for the last element */
+}
+
+.filter-select {
+    -webkit-appearance: none;      /* Removes default styling of select boxes in WebKit browsers */
+    -moz-appearance: none;         /* Removes default styling for Firefox */
+    appearance: none;              /* Standard way to remove default styling */
+    background-color: #fff;        /* Background color matching the input fields */
+    border: 1px solid #ccc;        /* Border like the input fields */
+    border-radius: 4px;            /* Rounded corners like the input fields */
+}
