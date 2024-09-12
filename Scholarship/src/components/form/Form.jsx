@@ -65,8 +65,8 @@ export const Form = ({ userType, fetchData }) => {
 
   return (
     <>
-    <div>
-      <h1>APPLICATION FORM</h1>
+    <div className='application_form_heading'>
+      <h1 className='heading'>APPLICATION FORM</h1>
     </div>
     <div className="form">
       <form onSubmit={handleSubmit}>
@@ -255,8 +255,10 @@ export const Form = ({ userType, fetchData }) => {
             
           </div>
         </fieldset>
+        <div className="submit_button">
 
         <input type="submit" value="Submit" />
+        </div>
       </form>
     </div>
     </>
