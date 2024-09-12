@@ -2,7 +2,7 @@
   width: 100%;
   padding: 30px; /* Increased padding */
   background-color: #ffffff;
-  box-shadow: 0 4px 10px green; /* More pronounced shadow */
+  box-shadow: 0 4px 10px rgb(61, 170, 21); /* More pronounced shadow */
   border-radius: 10px; /* Slightly larger radius */
   margin: 20px auto;
   max-width: 800px; /* Increased width for better display */

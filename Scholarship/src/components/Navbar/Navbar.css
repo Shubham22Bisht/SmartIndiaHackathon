@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
     background-color: #333;
+    padding: 15px;
   }
   
   .navbar-logo {
@@ -16,6 +16,9 @@
     list-style: none;
     display: flex;
     gap: 15px;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
   }
   
   .navbar-links li {
@@ -31,4 +34,8 @@
   .nav-link:hover {
     text-decoration: underline;
   }
+  .auth-links {
+    display: flex;
+    gap: 20px; /* Adjusts space between Login and Signup */
+}
   

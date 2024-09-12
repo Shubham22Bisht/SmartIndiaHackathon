@@ -10,12 +10,15 @@ const Navbar = () => {
         <li>
           <Link to="/" className="nav-link">Home</Link>
         </li>
+        <div className='auth-links'>
         <li>
           <Link to="/login" className="nav-link">Login</Link>
         </li>
         <li>
           <Link to="/signup" className="nav-link">Signup</Link>
         </li>
+        </div>
+        
       </ul>
     </nav>
   );
