@@ -12,7 +12,7 @@ const Navbar = () => {
         </li>
         <div className='auth-links'>
         <li>
-          <Link to="/login" className="nav-link">Login</Link>
+          {/* <Link to="/login" className="nav-link">Login</Link> */}
         </li>
         <li>
           <Link to="/signup" className="nav-link">Signup</Link>
