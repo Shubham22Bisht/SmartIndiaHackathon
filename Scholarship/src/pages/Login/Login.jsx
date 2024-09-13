@@ -1,30 +1,29 @@
 import React, { useState } from 'react';
 import './Login.css';
-import axios from 'axios';
+import { Link } from 'react-router-dom'; // Assuming you're using React Router
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleSubmit = async (e) => {
+  const [role, setRole] = useState('student');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "https://your-domain.com/login";  // Update this URL with your actual endpoint
-    try {
-      const response = await axios.post(url, {
-        name: name,
-        password: password
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      console.log('Response:', response.data);
-      // You can handle your login logic or redirect here
-    } catch (error) {
-      console.error('Error:', error.response);
-      // Handle errors here
+    // Add login logic here based on the role (student or admin)
+    console.log('Role:', role);
+    console.log('Email:', email);
+    console.log('Password:', password);
+
+    // Example error handling for empty fields
+    if (!email || !password) {
+      setError('Please fill in all fields');
+      return;
     }
+    
+    setError('');
+    // Further login handling like API calls here
   };
-  
 
   return (
     <div className="login-container">
@@ -58,6 +57,7 @@ const Login = () => {
           </label>
         </div>
 
+        {/* Common fields for both Student and Admin */}
         <div className="input-group">
           <label htmlFor="email">Email</label>
           <input
@@ -81,6 +81,11 @@ const Login = () => {
         </div>
 
         <button type="submit" className="login-btn">Login</button>
+
+        {/* Link to redirect to signup */}
+        <p className="redirect-signup">
+          Don't have an account? <Link to="/signup">Signup here</Link>
+        </p>
       </form>
     </div>
   );
