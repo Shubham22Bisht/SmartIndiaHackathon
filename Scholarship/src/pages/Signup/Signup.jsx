@@ -10,22 +10,51 @@ const Signup = () => {
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Basic form validation
+    if (!name || !email || !password || !confirmPassword || (role === 'admin' && !department)) {
+      setError('Please fill in all fields');
+      return;
+    }
+  
+    // Email format validation
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      setError('Invalid email format');
+      return;
+    }
+  
+    // Password match validation
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-    setError('');
-    // Handle signup logic here based on the role (student or admin)
-    console.log('Role:', role);
-    console.log('Name:', name);
-    console.log('Email:', email);
-    if (role === 'admin') {
-      console.log('Department:', department);
+  
+    setError(''); // Clear any prior errors
+    const userData = {
+      name,
+      email,
+      password,
+      role,
+      ...(role === 'admin' && { department }) // Conditionally add department for admin role
+    };
+  
+    try {
+      // Placeholder URL and headers - replace with your actual values
+      const url = ''; // signup url
+      const response = await axios.post(url, userData, {
+        headers: { 'Content-Type': 'application/json' }
+      });
+      console.log('Signup successful:', response.data);
+      // Handle successful signup (e.g., redirect or clear form)
+    } catch (error) {
+      console.error('Signup failed:', error.response || error.message);
+      setError('Failed to sign up. Please try again.');
     }
   };
-
+  
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>

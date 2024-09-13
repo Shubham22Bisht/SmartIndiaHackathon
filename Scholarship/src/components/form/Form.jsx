@@ -31,20 +31,31 @@ const ApprovalCheckboxes = ({ fieldName, onChange, userType }) => {
   );
 };
 
-export const Form = ({ userType, fetchData }) => {
+export const Form = () => {
+
+  const { userId } = useParams();
   const [inputs, setInputs] = useState({});
   const [approvals, setApprovals] = useState({});
+  const [userType,setUserType]=useState();
 
   useEffect(() => {
-    if (userType !== 'student') {
-      fetchData().then(data => {
-        setInputs(data.inputs);
+    const fetchUserData = async () => {
+      const url = `/api/users/${userId}`; // Adjust the URL as needed
+      try {
+        const { data } = await axios.get(url);
+        setInputs(data.inputs); // Assume the API returns data in this format
         setApprovals(data.approvals);
-      }).catch(error => {
-        console.error('Failed to fetch data:', error);
-      });
+        // setting the user type
+        setUserType(data.userType);
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+      }
+    };
+
+    if (userId) {
+      fetchUserData();
     }
-  }, [userType, fetchData]);
+  }, [userId]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -208,7 +219,7 @@ export const Form = ({ userType, fetchData }) => {
             <label>
               Scholarship Category:
               <select
-                name="ScholarshipCategory"
+                name="scholarshipCategory"
                 value={inputs.ScholarshipCategory || ""}
                 onChange={handleChange}
                 disabled={userType !== 'student'} // Only editable for the student
@@ -225,8 +236,8 @@ export const Form = ({ userType, fetchData }) => {
 
         {/* Bank Details Section */}
         <fieldset className="section bank-info">
-          <legend>Bank Details</legend>
-          <div className="form-row">
+          <legend >Bank Details</legend>
+          <div className="form-row"> 
             <label>
               Bank Account No:
               <input

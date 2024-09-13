@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
 import './Login.css';
-
+import axios from 'axios';
 const Login = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Name:', name);
-    console.log('Password:', password);
-    // Handle login logic here
+    const url = "https://your-domain.com/login";  // Update this URL with your actual endpoint
+    try {
+      const response = await axios.post(url, {
+        name: name,
+        password: password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      console.log('Response:', response.data);
+      // You can handle your login logic or redirect here
+    } catch (error) {
+      console.error('Error:', error.response);
+      // Handle errors here
+    }
   };
+  
 
   return (
     <div className="login-container">
