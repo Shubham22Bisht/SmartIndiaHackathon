@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import axios from 'axios';
 const Login = () => {
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,16 +30,45 @@ const Login = () => {
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
+        {error && <p className="error-message">{error}</p>}
+
+        {/* Checkboxes for role selection */}
+        <div className="role-selection">
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="student"
+              checked={role === 'student'}
+              onChange={() => setRole('student')}
+              required
+            />
+            Student
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="admin"
+              checked={role === 'admin'}
+              onChange={() => setRole('admin')}
+              required
+            />
+            Admin
+          </label>
+        </div>
+
         <div className="input-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="email">Email</label>
           <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
+
         <div className="input-group">
           <label htmlFor="password">Password</label>
           <input
@@ -50,6 +79,7 @@ const Login = () => {
             required
           />
         </div>
+
         <button type="submit" className="login-btn">Login</button>
       </form>
     </div>

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './StatusTracker.css';
-
 const StatusTracker = ({ currentStep }) => {
-  const [review, setReview] = useState('Thank you for your purchase! Please let us know if you have any feedback.');
   const steps = [
     { name: 'Order Placed', date: '03 Sep', color: '#FFD700' }, // Gold
     { name: 'Shipped', date: '04 Sep', color: '#FF8C00' },      // Dark orange
@@ -25,14 +23,14 @@ const StatusTracker = ({ currentStep }) => {
               </div>
             </div>
             {index < steps.length - 1 && (
-              <div className={`step-line ${index < currentStep ? 'completed' : ''}`} style={{ backgroundColor: index < currentStep ? steps[index].color : '#ddd' }}></div>
+              <div className={`step-line ${index < currentStep ? 'completed' : ''}`} style={{ backgroundColor: index < currentStep ? step.color : '#ddd' }}></div>
             )}
           </React.Fragment>
         ))}
       </div>
       <div className="review-box">
         <textarea
-          value={review}
+          value="Thank you for your purchase! Please let us know if you have any feedback."
           readOnly
           aria-label="Review"
         ></textarea>

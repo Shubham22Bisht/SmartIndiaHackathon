@@ -7,7 +7,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [department, setDepartment] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('student');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
