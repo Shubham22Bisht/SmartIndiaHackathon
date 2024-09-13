@@ -228,6 +228,20 @@ export const Form = ({ userType, fetchData }) => {
           <legend>Bank Details</legend>
           <div className="form-row">
             <label>
+              Bank Account Holder:
+              <input
+                name="Holder"
+                type="text"
+                value={inputs.Holder || ""}
+                onChange={handleChange}
+                disabled={userType !== 'student'} // Only editable for the student
+              />
+            </label>
+            {userType !== 'student' && <ApprovalCheckboxes fieldName="Holder" onChange={handleApprovalChange} userType={userType} />}
+           
+          </div>
+          <div className="form-row">
+            <label>
               Bank Account No:
               <input
                 name="accountNo"
